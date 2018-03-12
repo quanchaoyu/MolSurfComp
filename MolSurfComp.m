@@ -9,7 +9,12 @@ function MolSurfComp
 % c   Written by Chaoyu QUAN.
 % c   Email: quanchaoyu@gmail.com (C. QUAN) or bsberkeley@gmail.com (B. STAMM)
 % c
-% c   References: 
+% c   This code is governed by the LGPL license and abiding by the rules of distribution of free software.
+% c
+% c   This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+% c   See the GNU Lesser General Public License for more details.
+% c
+% c   Users of this code are asked to include the following references in their publications:
 % c   [1] C. Quan, B. Stamm, Mathematical analysis and calculation of molecular surfaces.
 % c   Journal of Computational Physics, 2016, 322: 760-782.
 % c
