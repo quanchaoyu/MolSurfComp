@@ -1,0 +1,7 @@
+COMPND      METHANAL
+AUTHOR      DAVE WOODCOCK  96 07 02
+ATOM      1  H           1       0.000  -2.500   0.000  1.00  0.00
+ATOM      2  H           1       0.000   2.500   0.000  1.00  0.00
+ATOM      3  H           1       4.330  -0.000   0.000  1.00  0.00
+TER       4              1
+END
