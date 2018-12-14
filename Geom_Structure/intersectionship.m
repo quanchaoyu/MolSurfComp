@@ -5,7 +5,7 @@ function [M_int,num_int] = intersectionship(Geom,Rp,nmax_centers,num_centers,ind
 % c   num_int: number of intersected atoms with the j-th atom in the i-th box
 % c
 
-nmax_int = Geom.M; % max number of intersected SAS balls with an arbitrary SAS ball
+nmax_int = 400;Geom.M; % max number of intersected SAS balls with an arbitrary SAS ball
 % M_int = zeros(num_nonemptyboxes,nmax_centers,nmax_int);
 % num_int = zeros(num_nonemptyboxes,nmax_centers);
 M_int = zeros(Geom.M,nmax_int); %   matrix of intersection

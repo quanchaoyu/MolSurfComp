@@ -9,7 +9,7 @@ function [nmax_centers,num_centers,ind_smallboxes,nonemptyboxes,num_nonemptyboxe
 % c   num_nonemptyboxes: the number of nonempty boxes
 % c
 
-nmax_centers = Geom.M; % max number of possible centers in a small box
+nmax_centers = 1000;%Geom.M; % max number of possible centers in a small box
 nx = smallboxes(1,2)-smallboxes(1,1); % number of boxes along with X axis
 ny = smallboxes(2,2)-smallboxes(2,1); % number of boxes along with Y axis
 nz = smallboxes(3,2)-smallboxes(3,1); % number of boxes along with Z axis

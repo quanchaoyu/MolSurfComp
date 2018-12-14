@@ -1,23 +1,24 @@
 ## Inputs for running the MolSurfComp package
 
 # PDB File:
-filename 1ETN               % filename of molecule such as: 1YJO caffeine
+filename 1ETN
 format .pdb                 % .pdb format with UFF VDW radii, or .xyzr format with 4 colums: center (x,y,z) & radius r.
 
 # Parameters:
-radius_probe 1.5            % radius of the solvent probe
-arg_meshing 1 0.2           % meshing: 1 or 0; mesh size: d
+radius_probe 1.              % radius of the solvent probe
+arg_meshing 1 0.15           % meshing: 1 or 0; mesh size: d
+arg_fillholes 0             % fill inner cavities
 
 # Visualization:
 arg_viz 1                   % viz: 1 or 0 (true or false)
 arg_ext 1                   % viz exterior surface: 1 or 0 
 arg_int 0                   % viz interior surface: 1 or 0
 
-viz_SAS 1 0.1                 % [viz,transparency], viz SAS: 1 or 0; transparency: 0 to 1
+viz_SAS 1 0.1               % [viz,transparency], viz SAS: 1 or 0; transparency: 0 to 1
 viz_SES 1 1                 % [viz,transparency], viz SES: 1 or 0; transparency: 0 to 1
 
-viz_sing 1                  % viz singularities on concave patches
-viz_CirSeg 1 1              % viz SAS circles and segments: [exterior,interior]
+viz_sing 0                  % viz singularities on concave patches
+viz_CirSeg 0 0              % viz SAS circles and segments: [exterior,interior]
 
 # Outputs:
 out_AreaVol 1               % display molecular volumes & areas

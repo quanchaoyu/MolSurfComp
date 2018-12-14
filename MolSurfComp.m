@@ -9,12 +9,7 @@ function MolSurfComp
 % c   Written by Chaoyu QUAN.
 % c   Email: quanchaoyu@gmail.com (C. QUAN) or bsberkeley@gmail.com (B. STAMM)
 % c
-% c   This code is governed by the LGPL license and abiding by the rules of distribution of free software.
-% c
-% c   This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-% c   See the GNU Lesser General Public License for more details.
-% c
-% c   Users of this code are asked to include the following references in their publications:
+% c   References: 
 % c   [1] C. Quan, B. Stamm, Mathematical analysis and calculation of molecular surfaces.
 % c   Journal of Computational Physics, 2016, 322: 760-782.
 % c
@@ -52,6 +47,9 @@ if strcmp(Para.format, '.pdb')
     Geom = read_PDB(Para.filename); % read a pdb-file, UFF VDW-radii
 elseif strcmp(Para.format,'.xyzr') 
     Geom = read_xyzr(Para.filename); % 4 colums: center (x,y,z) & radius r.
+elseif strcmp(Para.format,'.xyz')
+    Geom = read_xyz(Para.filename);
+    %Geom.R = 1.1*Geom.R;
 else
     disp('It is not a readable file!');
 end
@@ -72,6 +70,13 @@ if Para.out_STL
 end
 
 data_MolSurf;
+
+%% Fill inner holes
+Para.arg_fillholes = false;
+Para.viz_holes = false;
+if Para.arg_fillholes
+    fillhole;
+end
 
 %% Display molecular areas and volumes
 if Para.out_AreaVol

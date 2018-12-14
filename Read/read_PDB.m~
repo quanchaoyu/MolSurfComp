@@ -1,0 +1,89 @@
+function Geom = read_PDB(filename)
+% c
+% c   Read pdb-file and save data to Geom
+% c
+
+fid = fopen('Inputs.txt','r');
+
+line = fgetl(fid);
+
+while ischar(line)
+    [token,remain] = strtok(line);
+    
+    p = 1;
+    switch(token)
+        % Filename & Option
+        case 'filename', Para.filename = strtok(remain);
+        case 'format', Para.format = strtok(remain);
+        case 'option', Para.option = strtok(remain);
+        
+        % Parameters    
+        case 'radius_probe', Para.radius_probe = sscanf(remain,'%f');
+        case 'arg_meshing', Para.arg_meshing = sscanf(remain,'%d%f')';
+        
+        % Display
+        case 'out_AreaVol', Para.out_AreaVol = sscanf(remain,'%d');
+        
+        % Outputs    
+        case 'out_MolStrc', Para.out_MolStrc = sscanf(remain,'%d');
+        case 'out_STL', Para.out_STL = sscanf(remain,'%d');    
+            
+        % Visualization
+        case 'arg_viz', Para.arg_viz = sscanf(remain,'%d');
+        case 'arg_ext', Para.arg_ext = sscanf(remain,'%d');
+        case 'arg_int', Para.arg_int = sscanf(remain,'%d');
+        
+        case 'viz_SAS', Para.viz_SAS = sscanf(remain,'%d%f')';
+        case 'viz_SES', Para.viz_SES = sscanf(remain,'%d%f')';
+            
+        case 'viz_sing', Para.viz_sing = sscanf(remain,'%d');
+        case 'viz_CirSeg', Para.viz_CirSeg = sscanf(remain,'%d%d')';
+
+        otherwise p = 0;
+    end
+    
+    if p == 1
+        fprintf([token,': ',num2str(eval(['Para.',token])),'\n']);
+    end
+    
+    line = fgetl(fid);
+end
+
+fclose(fid);
+
+
+filename = [filename,'.pdb'];
+fid = fopen(filename,'r');
+
+line = fgetl(fid);
+it = 0;
+while ischar(line)
+	if (strncmp('HETATM',line,6) || strncmp('ATOM',line,4)) 
+        it = it + 1;
+        switch(line(14))
+            %% UFF VdW radius table, Charges
+            case  'H', r = 1.443; 
+            case  'C', r = 1.9255; 
+            case  'O', r = 1.75; 
+            case  'N', r = 1.83; 
+            case  'P', r = 2.0735; 
+            case  'S', r = 2.0175; 
+            otherwise, r = 1.75; 
+        end
+        
+        c =  sscanf(line(31:54),'%f %f %f');
+        
+        Geom.R(it,1) = r;
+        Geom.centers(it,:) = c;
+        Geom.T(it,1) = line(14);
+        
+    end
+    
+    line = fgetl(fid);
+end
+fclose(fid);
+
+Geom.M = it;
+Geom.centers = Geom.centers(1:it,:);
+
+end
