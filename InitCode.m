@@ -18,6 +18,4 @@ addpath('Mesh_Generation');
 addpath('Visulization');
 addpath('Output');
 
-addpath('/Users/quanchaoyu/Documents/MATLAB/Matlab_SES/PDB');
-
 end

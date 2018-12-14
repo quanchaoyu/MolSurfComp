@@ -25,10 +25,10 @@ for k=1:loopsize
 end
 
 
-if theta0 < -eps % the point is covered by a neighboring SAS-ball
-    true = 0;
-    return;
-end
+% if theta0 < -eps % the point is covered by a neighboring SAS-ball
+%     true = 0;
+%     return;
+% end
 
 K = zeros(10,1);
 nK = 0;

@@ -64,7 +64,7 @@ DataAV.Veses = 0;
 
 Area_sphpat = zeros(lmax,1);% Area_sphpat(i) records the area of the i-th spherical SAS-patch
 
-global Rj;
+
 global tree;
 max_nloops = 20;
 for j = 1:(2*max_nloops+1)
@@ -72,7 +72,9 @@ for j = 1:(2*max_nloops+1)
 end
 tree = tree0;
 
+global Rj;
 Rj=zeros(nsegment,1);
+segment0 = zeros(nsegment,11);
 
 for i=1:M
 
@@ -139,8 +141,8 @@ for i=1:M
         patch_atom(npatches-npatches_i+1:npatches,1)=ones(npatches_i,1).*i;        
         
         % modify loops_i,segment,circle so that visu_sphereicalpatch can be used
-        % segment0 : [c,n,r,spoint,angle]
-        [loops_i0,segment0,circle0] = mod_seg_loop_cir(i,nloops_i,loops_i,loopsize_i,circleindex,ncircleindex,satom,nsatom,C,R,segment,nsegment,ncrasegment);
+        % segment0 : [c,n,r,spoint,angle] segment0,
+        [loops_i0,segment0,circle0] = mod_seg_loop_cir(i,nloops_i,loops_i,loopsize_i,circleindex,ncircleindex,satom,nsatom,C,R,segment,nsegment,ncrasegment,segment0);
         
         for j = 1:npatches_i
             

@@ -22,9 +22,6 @@ for i=1:npatches
 end
 
 % visulize the convex patches
-global Rj; %
-Rj=zeros(nsegment,1);
-
 global arg_eSAS;
 arg_eSAS = 1;
 
@@ -33,6 +30,9 @@ index_SASpatch = 0;
 
 global Para Figs;
 
+global Rj; %
+Rj=zeros(nsegment,1);
+segment0=zeros(nsegment,11);
 for i=1:M
     if nsatom(i)>0
         nloops=loops_index(i,1)-1;
@@ -53,7 +53,7 @@ for i=1:M
         patchesize_i=patchesize(numpatches+1:numpatches+npatches_i,1);
 
         %   modify loops_i,segment,circle so that mesh_sphpat can be used
-        [loops_i0,segment0,circle0] = mod_seg_loop_cir(i,nloops_i,loops_i,loopsize_i,circleindex,ncircleindex,satom,nsatom,C,R,seg,nsegment,ncrasegment);
+        [loops_i0,segment0,circle0] = mod_seg_loop_cir(i,nloops_i,loops_i,loopsize_i,circleindex,ncircleindex,satom,nsatom,C,R,seg,nsegment,ncrasegment,segment0);
         
         for j=1:npatches_i
                             
@@ -77,8 +77,8 @@ for i=1:M
                     if Para.arg_viz && Para.arg_ext
                         figure(Figs.ext)
                         hold on;
+                        mesh_sphpat(C(i,:),R(i)+Rp,loops_i0,loopsize_i,segment0,circle0,patches_i(j,:),patchesize_i(j));
                     end
-                    mesh_sphpat(C(i,:),R(i)+Rp,loops_i0,loopsize_i,segment0,circle0,patches_i(j,:),patchesize_i(j));
                 end
                 
             else
@@ -86,8 +86,8 @@ for i=1:M
                     if Para.arg_viz && Para.arg_int
                         figure(Figs.int)
                         hold on;
+                        mesh_sphpat(C(i,:),R(i)+Rp,loops_i0,loopsize_i,segment0,circle0,patches_i(j,:),patchesize_i(j));
                     end
-                    mesh_sphpat(C(i,:),R(i)+Rp,loops_i0,loopsize_i,segment0,circle0,patches_i(j,:),patchesize_i(j));
                 end
                 
             end
