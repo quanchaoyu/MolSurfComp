@@ -24,7 +24,7 @@ data_ext; % compute data of exterior SAS
 if(Para.arg_viz) && (Para.arg_ext)
     figure(Figs.ext);
     visu_extsegment;
-    FigSetting;
+    %FigSetting;
 end
 
 %% SES structure

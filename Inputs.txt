@@ -6,7 +6,7 @@ format .pdb                 % .pdb format with UFF VDW radii, or .xyzr format wi
 
 # Parameters:
 radius_probe 1.              % radius of the solvent probe
-arg_meshing 1 0.15           % meshing: 1 or 0; mesh size: d
+arg_meshing 1 0.2           % meshing: 1 or 0; mesh size: d
 arg_fillholes 0             % fill inner cavities
 
 # Visualization:
@@ -14,10 +14,10 @@ arg_viz 1                   % viz: 1 or 0 (true or false)
 arg_ext 1                   % viz exterior surface: 1 or 0 
 arg_int 0                   % viz interior surface: 1 or 0
 
-viz_SAS 1 0.1               % [viz,transparency], viz SAS: 1 or 0; transparency: 0 to 1
+viz_SAS 0 0.1               % [viz,transparency], viz SAS: 1 or 0; transparency: 0 to 1
 viz_SES 1 1                 % [viz,transparency], viz SES: 1 or 0; transparency: 0 to 1
 
-viz_sing 0                  % viz singularities on concave patches
+viz_sing 1                  % viz singularities on concave patches
 viz_CirSeg 0 0              % viz SAS circles and segments: [exterior,interior]
 
 # Outputs:

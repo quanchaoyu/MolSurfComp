@@ -156,11 +156,8 @@ for i=1:M
             DataAV.Vcses=DataAV.Vcses+(R(i)/(R(i)+Rp))^2*Area*R(i)/3;
             
         end
-        
     end
-
 end
-
 
 DataSeg.segment = segment;
 DataSeg.nsegment = nsegment;
@@ -249,21 +246,17 @@ function [patches,patchesize,npatches]=patchesconstruct(i,C,R,segment,ncrasegmen
 global Para;
 Rp = Para.radius_probe;
 
-patches=zeros(nloops_i+ncircleindex,pmax); %% it records the boundary loops of spherical patches.
-patchesize=zeros(nloops_i+ncircleindex,1);
-npatches=0;
+patches = zeros(nloops_i+ncircleindex,pmax); %% it records the boundary loops of spherical patches.
+patchesize = zeros(nloops_i+ncircleindex,1);
+npatches = 0;
 
 global tree;
-S0=[1:1:nloops_i,-1:-1:-ncircleindex];
-tree(1)=treenode(1,S0,S0(1),nloops_i,ncircleindex);
-ntree=1;
-j=1;
+S0 = [1:1:nloops_i,-1:-1:-ncircleindex];
+tree(1) = treenode(1,S0,S0(1),nloops_i,ncircleindex);
+ntree = 1;
+j = 1;
 
-if ncircleindex >0 && nloops_i>= 2
-    
-end
-
-for s=1:2*(nloops_i+ncircleindex)+1
+for s = 1:2*(nloops_i+ncircleindex)+1
     
     if j>ntree%%this means that the set has been completed divided
         break;
@@ -379,7 +372,6 @@ for s=1:2*(nloops_i+ncircleindex)+1
     
 end
 
-
 for j=1:ntree
     if tree(j).activenode==0 && tree(j).leftnode==0
         npatches=npatches+1;
@@ -388,11 +380,8 @@ for j=1:ntree
     end
 end
 
-
-
 patches=patches(1:npatches,:);
 patchesize=patchesize(1:npatches,1);
-
 
 end
 

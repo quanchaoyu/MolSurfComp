@@ -17,5 +17,8 @@ addpath('Core');
 addpath('Mesh_Generation');
 addpath('Visulization');
 addpath('Output');
+addpath('Dist_Computation');
+
+addpath('/Users/quanchaoyu/Documents/MATLAB/PDB_Files');
 
 end
