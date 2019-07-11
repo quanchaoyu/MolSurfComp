@@ -1,4 +1,4 @@
-function VisualizeSlide
+function VisualizeSlice
 
 %names = ["1B17","1CRN","1ETN","1GZI","1YJO","3DIK","101M","3DIK"];
 filename = 'benzene';
