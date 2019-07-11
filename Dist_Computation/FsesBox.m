@@ -24,6 +24,12 @@ if(nargin==4)
             [X,Y,Z] = meshgrid(xl,SliceInfo{2,1},zl);
         case char('z')
             [X,Y,Z] = meshgrid(xl,yl,SliceInfo{2,1});
+        case char('xAv')
+            [X,Y,Z] = meshgrid((Mx+mx)/2,yl,zl);
+        case char('yAv')
+            [X,Y,Z] = meshgrid(xl,(My+my)/2,zl);
+        case char('zAv')
+            [X,Y,Z] = meshgrid(xl,yl,(Mz+mz)/2);
     end            
 else
     [X,Y,Z] = meshgrid(xl,yl,zl);
@@ -38,11 +44,14 @@ Zv = reshape(Z,prod(S),1);
 Fsesv = zeros(size(Xv));
 Fsasv = zeros(size(Xv));
 
-% compute the SAS-distance at each point
+% compute the SAS-distance at each point of the grid
 for i = 1:length(Xv)
     x = [Xv(i,1),Yv(i,1),Zv(i,1)];
+    % evaluate distance function
     fsasx = Dist_SAS(x);
+    % change sign of SAS-distance
     Fsasv(i,1) = -fsasx;
+    % compute SES-distance
     Fsesv(i,1) = -fsasx - Rp;
 end
 

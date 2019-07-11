@@ -3,16 +3,19 @@ function VisualizeSlice
 %names = ["1B17","1CRN","1ETN","1GZI","1YJO","3DIK","101M","3DIK"];
 filename = 'benzene';
 np = 100;
-Rp = 0;
+Rp = 1;
 
-SliceInfo{1,1} = 'z';
-SliceInfo{2,1} = -8.560666666666666;
+SliceInfo{1,1} = 'zAv';
+SliceInfo{2,1} = -8.5;
 
 [Fses,Fsas,X,Y,Z] = FsesBox(Rp,np,filename,SliceInfo);
 
 figure(1)
 clf
-surf(X,Y,Z,Fses)
+hold on
+surf(X,Y,Z,Fses,'EdgeColor','none')
+[~,h] = contour(X,Y,Fses,[0 0],'b','LineWidth',3);
+h.ContourZLevel = Z(1,1);
 view(0,90)
 colorbar
 title('Distance to SES')
@@ -20,7 +23,10 @@ movegui('northwest')
 
 figure(2)
 clf
-surf(X,Y,Z,Fsas)
+hold on
+surf(X,Y,Z,Fsas,'EdgeColor','none')
+[~,h] = contour(X,Y,Fsas,[0 0],'r','LineWidth',3);
+h.ContourZLevel = Z(1,1);
 view(0,90)
 colorbar
 title('Distance to SAS')
