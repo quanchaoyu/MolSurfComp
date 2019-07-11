@@ -1,5 +1,6 @@
 function [Fses,Fsas,X,Y,Z] = FsesBox(Rp,np,filename,SliceInfo)
 
+
 MolSurfComp_WithInput(Rp,filename)
 DataGlob;
 
@@ -56,7 +57,7 @@ for i = 1:length(Xv)
 end
 
 % reshape 
-if(length(size(S))==2)
+if(size(S,2)==2)
     Fses = reshape(Fsesv,S(1),S(2));
     Fsas = reshape(Fsasv,S(1),S(2));
 else
