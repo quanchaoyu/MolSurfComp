@@ -19,6 +19,9 @@ addpath('Visulization');
 addpath('Output');
 addpath('Dist_Computation');
 
-addpath('/Users/quanchaoyu/Documents/MATLAB/PDB_Files');
+% added by B. Stamm for a particular application
+addpath('dd_scaling_application');
+
+%addpath('/Users/quanchaoyu/Documents/MATLAB/PDB_Files');
 
 end
