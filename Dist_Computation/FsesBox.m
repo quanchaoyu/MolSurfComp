@@ -1,4 +1,4 @@
-function [Fses,Fsas,X,Y,Z] = FsesBox(Rp,np,filename)
+function [Fses,Fsas,X,Y,Z] = FsesBox(Rp,np,filename,SliceInfo)
 
 MolSurfComp_WithInput(Rp,filename)
 DataGlob;
@@ -16,11 +16,24 @@ mz = min(Geom.centers(:,3)-Rmax-Rp);
 xl = mx:(Mx-mx)/(np-1):Mx;
 yl = my:(My-my)/(np-1):My;
 zl = mz:(Mz-mz)/(np-1):Mz;
-[X,Y,Z] = meshgrid(xl,yl,zl);
-Xv = reshape(X,np^3,1);
-Yv = reshape(Y,np^3,1);
-Zv = reshape(Z,np^3,1);
+if(nargin==4)
+    switch SliceInfo{1,1}
+        case char('x')
+            [X,Y,Z] = meshgrid(SliceInfo{2,1},yl,zl);
+        case char('y')
+            [X,Y,Z] = meshgrid(xl,SliceInfo{2,1},zl);
+        case char('z')
+            [X,Y,Z] = meshgrid(xl,yl,SliceInfo{2,1});
+    end            
+else
+    [X,Y,Z] = meshgrid(xl,yl,zl);
+end
+S = size(X);
+Xv = reshape(X,prod(S),1);
+Yv = reshape(Y,prod(S),1);
+Zv = reshape(Z,prod(S),1);
 
+    
 % allocate memory
 Fsesv = zeros(size(Xv));
 Fsasv = zeros(size(Xv));
@@ -34,5 +47,10 @@ for i = 1:length(Xv)
 end
 
 % reshape 
-Fses = reshape(Fsesv,np,np,np);
-Fsas = reshape(Fsasv,np,np,np);
+if(length(size(S))==2)
+    Fses = reshape(Fsesv,S(1),S(2));
+    Fsas = reshape(Fsasv,S(1),S(2));
+else
+    Fses = reshape(Fsesv,S(1),S(2),S(3));
+    Fsas = reshape(Fsasv,S(1),S(2),S(3));
+end
