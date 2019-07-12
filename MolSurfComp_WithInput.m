@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function MolSurfComp_WithInput(Rp,filename)
+function MolSurfComp_WithInput(Rp,file)
 % c
 % c
 % c   Molecular Surface Computation: SES-singularitied are completely
@@ -45,8 +45,8 @@ InitCode; % add pathes
 read_inputs; % read inputs
 
 %%% Hack:
-Para.format='.pdb';
-Para.filename = filename;
+Para.format = file.format;
+Para.filename = file.name;
 %%% End Hack
 
 if strcmp(Para.format, '.pdb')
