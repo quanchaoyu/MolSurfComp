@@ -11,7 +11,7 @@ if(DistvdW<0)
     return
 end
 
-Rp = 3;
+Rp = 2;
 cnt = 2;
 f(cnt,1) = Rp;
 F = FsesBox(Rp,np,filename) - Rp;

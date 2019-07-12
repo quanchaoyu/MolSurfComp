@@ -17,7 +17,6 @@ for i = 1:num_nonemptyboxes
         m = ind_smallboxes(ind(1),ind(2),ind(3),j);
         [INT,num_INT] = INT_SAS(j,ind,Geom,Rp,num_centers,ind_smallboxes,smallboxes,nmax_int);
         
-        size(M_int)
         M_int(m,:) = INT;
         num_int(m,1) = num_INT;
 %         M_int(i,j,:) = INT;
