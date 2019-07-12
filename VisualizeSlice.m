@@ -6,7 +6,7 @@ function VisualizeSlice
 file.name = '3spheres';
 file.format = '.xyzr';
 
-np = 200;
+np = 100;
 Rp = 1;
 
 SliceInfo{1,1} = 'zAv';

@@ -1,7 +1,7 @@
 function f = FindRstar(np,filename)
 
 
-Rp = 0;
+Rp = 6;
 F = FsesBox(Rp,np,filename) - Rp;
 DistvdW = max(max(max(F)));
 f(1,1) = 0;
@@ -11,7 +11,7 @@ if(DistvdW<0)
     return
 end
 
-Rp = 6;
+Rp = 3;
 cnt = 2;
 f(cnt,1) = Rp;
 F = FsesBox(Rp,np,filename) - Rp;
