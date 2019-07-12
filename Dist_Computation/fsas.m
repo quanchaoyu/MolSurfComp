@@ -1,7 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Compute f(p) at point P
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [fsas,Xp,fses,patchtype,grad_fsas,laplace_fsas] = fsas(P,index_ball,C,R,M,probe,I,inter,Row,Iijk,Ii,In,Csas_I,segment,ncrasegment,circle,circleindex,ncircleindex,Csas_circle,Csas_patch,patches,patchesize,patches_index,loops,loopsize,loops_index)
+function [fsas,Xp,fses,patchtype,grad_fsas,laplace_fsas] = fsas(P,index_ball,...
+    C,R,M,probe,I,inter,Row,Iijk,Ii,In,Csas_I,segment,ncrasegment,circle,...
+    circleindex,ncircleindex,Csas_circle,Csas_patch,patches,patchesize,...
+    patches_index,loops,loopsize,loops_index)
 %c 
 %c this function run N times (N is the number of grid points)
 %c
@@ -17,7 +20,9 @@ if index_ball == 0 % P is out of every SAS-ball
     [fses,ind]=min((((ones(M,1)*P-C).^2)*ones(3,1)).^(1/2)-R');
     Xp=C(ind,:)+(R(ind)+probe)*(P-C(ind,:))/norm(P-C(ind,:)); % Xp is on the ball ind
     
-    if interiorpatch_inner(Xp,ind,C,R,I,probe,segment,ncrasegment,Csas_patch,patches,patchesize,patches_index,loops,loopsize,loops_index,circle,circleindex,ncircleindex) == 0
+    if interiorpatch_inner(Xp,ind,C,R,I,probe,segment,ncrasegment,...
+            Csas_patch,patches,patchesize,patches_index,loops,loopsize,...
+            loops_index,circle,circleindex,ncircleindex) == 0
         patchtype=[1,ind,0,0];
         fsas = fses-probe;
         grad_fsas = (P-C(ind,:))/norm(P-C(ind,:));
@@ -34,7 +39,9 @@ if CASE ~= 4
         Pi=C(S(i),:)+(R(S(i))+probe)*(P-C(S(i),:))/norm(P-C(S(i),:));
         Xp = Pi;
         ind = S(i);
-        if interiorpatch_external(Xp,ind,C,R,I,probe,segment,ncrasegment,Csas_patch,patches,patchesize,patches_index,loops,loopsize,loops_index,circle,circleindex,ncircleindex) == 1
+        if interiorpatch_external(Xp,ind,C,R,I,probe,segment,ncrasegment,...
+                Csas_patch,patches,patchesize,patches_index,loops,loopsize,...
+                loops_index,circle,circleindex,ncircleindex) == 1
             fses = -norm(P-Pi)+probe;
             fsas = fses-probe;
             patchtype=[2,S(i),0,0];
@@ -49,7 +56,8 @@ end
 if CASE ~= 4
     for i = 1:length(S)
         ind = S(i);
-        index_s = patches_index(ind,1); % start and end indices of patches ont the i-th SAS-ball
+        % start and end indices of patches ont the i-th SAS-ball
+        index_s = patches_index(ind,1); 
         index_e = patches_index(ind,2);
         if index_s == 0 % the ind-th SAS-sphere is completely covered by others
             continue;
@@ -72,7 +80,9 @@ if CASE ~= 4
                         %loopsize_i
                         for tt = 1:loopsize_i(patches(patch_j,loop_k),1)
                             sn = loops_i(patches(patch_j,loop_k),tt); % segment index
-                            seg = [segment(sn,1:2),ncrasegment(sn,4:6),ncrasegment(sn,1:3),I(segment(sn,3),:),ncrasegment(sn,8),segment(sn,5)];
+                            seg = [segment(sn,1:2),ncrasegment(sn,4:6),...
+                                ncrasegment(sn,1:3),I(segment(sn,3),:),...
+                                ncrasegment(sn,8),segment(sn,5)];
                             if check_doublecone(P,seg,C,R,probe)
                                 [Xij,scale] = X(seg(1),seg(2),P,C,R,probe);
                                 Xp = Xij;
@@ -85,7 +95,8 @@ if CASE ~= 4
                             end
                         end
                     else
-                        cn = -patches(patch_j,loop_k); % circle index
+                         % circle index
+                        cn = circleindex(ind,-patches(patch_j,loop_k));
                         ind_i = circle(cn,1);
                         ind_j = circle(cn,2);
                         if Csas_circle(cn) == 1 && check_Bij(P,ind_i,ind_j,C,R,probe)
@@ -114,7 +125,8 @@ for i=1:length(S)
         if Csas_I(k) == 1 % external intersection point
             Ip=I(k,:);
             i0=Iijk(k,1);j0=Iijk(k,2);k0=Iijk(k,3);
-            if tetrahedron([P,1],[C(i0,:),1],[C(j0,:),1],[C(k0,:),1],[Ip,1]) % P belongs to the tetrahedron corresponding to I(k,:)
+            if tetrahedron([P,1],[C(i0,:),1],[C(j0,:),1],[C(k0,:),1],...
+                    [Ip,1]) % P belongs to the tetrahedron corresponding to I(k,:)
                 Xp=Ip;
                 fses=-norm(Ip-P)+probe;
                 fsas = fses-probe;
@@ -203,7 +215,9 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  check if Xp is on a spherical patch
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function true = interiorpatch_inner(Xp,i,C,R,I,probe,segment,ncrasegment,Csas_patch,patches,patchesize,patches_index,loops,loopsize,loops_index,circle,circleindex,ncircleindex)
+function true = interiorpatch_inner(Xp,i,C,R,I,probe,segment,ncrasegment,...
+    Csas_patch,patches,patchesize,patches_index,loops,loopsize,loops_index,...
+    circle,circleindex,ncircleindex)
 
 point = Xp;
 ci = C(i,:);
@@ -255,7 +269,9 @@ for j = index_s:index_e
         true0 = 1;
         for k = 1:patchesize(j,1)
             if patches(j,k) > 0
-                if interiorloop(point,ci,C,ri,i,loops_i(patches(j,k),:),loopsize_i(patches(j,k),:),I,segment,ncrasegment) == 0 % Xp is outside a loop
+                if interiorloop_dist(point,ci,C,ri,i,R,proble,loops_i(patches(j,k),:),...
+                        loopsize_i(patches(j,k),:),I,segment,ncrasegment) == 0 
+                    % Xp is outside a loop
                     true0 = 0;
                     break;
                 end
@@ -283,7 +299,9 @@ for j = index_s:index_e
 end
 end
 
-function true = interiorpatch_external(Xp,i,C,R,I,probe,segment,ncrasegment,Csas_patch,patches,patchesize,patches_index,loops,loopsize,loops_index,circle,circleindex,ncircleindex)
+function true = interiorpatch_external(Xp,i,C,R,I,probe,segment,ncrasegment,...
+    Csas_patch,patches,patchesize,patches_index,loops,loopsize,loops_index,...
+    circle,circleindex,ncircleindex)
 
 point = Xp;
 ci = C(i,:);
@@ -328,7 +346,9 @@ for j = index_s:index_e
         true0 = 1;
         for k = 1:patchesize(j,1)
             if patches(j,k) > 0
-                if interiorloop(point,ci,C,ri,i,loops_i(patches(j,k),:),loopsize_i(patches(j,k),:),I,segment,ncrasegment) == 0 % Xp is outside a loop
+                if interiorloop_dist(point,ci,C,ri,i,R,probe,loops_i(patches(j,k),:),...
+                        loopsize_i(patches(j,k),:),I,segment,ncrasegment) == 0 
+                    % Xp is outside a loop
                     true0 = 0;
                     break;
                 end
@@ -393,7 +413,8 @@ for i=1:length(S)
     %Consider the situation P belongs to the intersection of two balls
     for j=(i+1):length(S)
         Pj=C(S(j),:)+(P-C(S(j),:))*(R(S(j))+probe)/(norm(C(S(j),:)-P));
-        if (R(S(i))+probe)-norm(C(S(i),:)-Pj)>=0&&(R(S(j))+probe)-norm(C(S(j),:)-Pi)>=0
+        if (R(S(i))+probe)-norm(C(S(i),:)-Pj)>=0&&...
+                (R(S(j))+probe)-norm(C(S(j),:)-Pi)>=0
             t=t+1;
             K(t,:)=[S(i),S(j)];
         end
