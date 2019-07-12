@@ -43,6 +43,7 @@ InitCode; % add pathes
 
 %% Read input file
 read_inputs; % read inputs
+
 if strcmp(Para.format, '.pdb')
     Geom = read_PDB(Para.filename); % read a pdb-file, UFF VDW-radii
 elseif strcmp(Para.format,'.xyzr') 

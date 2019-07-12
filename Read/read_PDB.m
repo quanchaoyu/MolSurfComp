@@ -6,6 +6,8 @@ function Geom = read_PDB(filename)
 filename = [filename,'.pdb'];
 fid = fopen(filename,'r');
 
+scalingfactor = 1.1;
+
 line = fgetl(fid);
 it = 0;
 while ischar(line)
@@ -24,7 +26,7 @@ while ischar(line)
         
         c =  sscanf(line(31:54),'%f %f %f');
         
-        Geom.R(it,1) = r;
+        Geom.R(it,1) = scalingfactor*r;
         Geom.centers(it,:) = c;
         Geom.T(it,1) = line(14);
         

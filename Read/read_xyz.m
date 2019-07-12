@@ -3,6 +3,7 @@ function Geom = read_xyz(filename)
 % c   Read xyz-file and save data to Geom
 % c
 
+scalingfactor = 1.1;
 
 filename = [filename,'.xyz'];
 fid = fopen(filename,'r');
@@ -31,7 +32,7 @@ while ischar(line)
         otherwise, line = fgetl(fid); continue;
     end
         
-    Geom.R(it,1) = r;
+    Geom.R(it,1) = scalingfactor*r;
     Geom.centers(it,:) = c';
     
     it = it + 1;
@@ -40,5 +41,6 @@ end
 it = it-1;
 fclose(fid);
 Geom.centers = Geom.centers(1:it,:);
+Geom.M = it;
 
 end

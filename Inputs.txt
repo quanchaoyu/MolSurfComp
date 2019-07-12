@@ -10,7 +10,7 @@ arg_meshing 1 0.2           % meshing: 1 or 0; mesh size: d
 arg_fillholes 0             % fill inner cavities
 
 # Visualization:
-arg_viz 1                   % viz: 1 or 0 (true or false)
+arg_viz 0                   % viz: 1 or 0 (true or false)
 arg_ext 1                   % viz exterior surface: 1 or 0 
 arg_int 0                   % viz interior surface: 1 or 0
 
@@ -21,7 +21,7 @@ viz_sing 1                  % viz singularities on concave patches
 viz_CirSeg 0 0              % viz SAS circles and segments: [exterior,interior]
 
 # Outputs:
-out_AreaVol 1               % display molecular volumes & areas
+out_AreaVol 0               % display molecular volumes & areas
 out_MolStrc 0               % output molecular data structure: 1 or 0
 out_STL 0                   % output STL file of the SES
 
