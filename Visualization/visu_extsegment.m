@@ -1,7 +1,7 @@
 function visu_extsegment
 DataGlob;
 
-division=100; % each segment is divided to 100 
+division=20; % each segment is divided to 100 
 n=ncrasegment(:,1:3);
 center=ncrasegment(:,4:6);
 r=ncrasegment(:,7);

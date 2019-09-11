@@ -1,7 +1,7 @@
 ## Inputs for running the MolSurfComp package
 
 # PDB File:
-filename 1ETN
+filename Benzene
 format .pdb                 % .pdb format with UFF VDW radii, or .xyzr format with 4 colums: center (x,y,z) & radius r.
 
 # Parameters:

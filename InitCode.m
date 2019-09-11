@@ -15,7 +15,7 @@ addpath('Classes');
 
 addpath('Core');
 addpath('Mesh_Generation');
-addpath('Visulization');
+addpath('Visualization');
 addpath('Output');
 addpath('Dist_Computation');
 
