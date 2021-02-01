@@ -10,7 +10,7 @@ arg_meshing 1 0.2           % meshing: 1 or 0; mesh size: d
 arg_fillholes 0             % fill inner cavities
 
 # Visualization:
-arg_viz 0                   % viz: 1 or 0 (true or false)
+arg_viz 1                   % viz: 1 or 0 (true or false)
 arg_ext 1                   % viz exterior surface: 1 or 0 
 arg_int 0                   % viz interior surface: 1 or 0
 
